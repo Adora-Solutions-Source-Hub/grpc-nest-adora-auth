@@ -22,8 +22,5 @@ export class CreateUserDto {
   @ApiProperty()
   phone: string;
 
-  @ApiProperty()
-  @ValidateIf((object, value) => value !== null)
-  hash: string;
 }
 
