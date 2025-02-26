@@ -2,7 +2,7 @@
 
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsString, MinLength, ValidateIf } from 'class-validator';
-import { LoginRequest, RegisterRequest, ValidateRequest } from '../auth.pb';
+import { LoginRequest, RegisterRequest, } from '../auth.pb';
 
 export class LoginRequestDto implements LoginRequest {
   @IsEmail()
@@ -30,7 +30,7 @@ export class RegisterRequestDto extends LoginRequestDto implements RegisterReque
   phone: string;
 }
 
-export class ValidateRequestDto implements ValidateRequest {
+export class ValidateRequestDto {
   @ApiProperty()
   token: string;
 }

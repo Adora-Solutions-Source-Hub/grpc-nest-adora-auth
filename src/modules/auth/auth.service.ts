@@ -51,20 +51,21 @@ export class AuthService {
         return data;
     }
 
-    public async validate({ token }: ValidateRequestDto): Promise<ValidateResponse> {
+    public async validate({ token }: ValidateRequestDto) {
         const decoded = await this.jwtService.verify(token);
+        console.log("🚀 ~ AuthService ~ validate ~ decoded:", decoded)
 
         if (!decoded) {
-            return { status: HttpStatus.FORBIDDEN, error: ['Token is invalid'], id: null };
+            return { status: HttpStatus.FORBIDDEN, error: ['Token is invalid'], data: null };
         }
 
         const user = await this.usersService.getOne({ email: decoded.email });
 
         if (!user) {
-            return { status: HttpStatus.CONFLICT, error: ['User not found'], id: null };
+            return { status: HttpStatus.CONFLICT, error: ['User not found'], data: null };
         }
 
-        return { status: HttpStatus.OK, error: null, id: decoded.id };
+        return decoded.id;
     }
 
     private async genPassword(str: string) {

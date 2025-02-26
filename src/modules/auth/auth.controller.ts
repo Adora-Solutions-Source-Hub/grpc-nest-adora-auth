@@ -1,6 +1,6 @@
-import { Controller, Inject, NotFoundException } from '@nestjs/common';
+import { Controller, Inject } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AUTH_SERVICE_NAME, ValidateResponse } from './auth.pb';
+import { AUTH_SERVICE_NAME, ValidateRequest, ValidateResponse } from './auth.pb';
 import { GrpcMethod } from '@nestjs/microservices';
 import { LoginRequestDto, RegisterRequestDto, ValidateRequestDto } from './dto/auth.dto';
 
@@ -26,7 +26,10 @@ export class AuthController {
     }
 
     @GrpcMethod(AUTH_SERVICE_NAME, 'Validate')
-    private validate(payload: ValidateRequestDto): Promise<ValidateResponse> {
-        return this.service.validate(payload);
+    private async validate(payload: ValidateRequest) {
+        console.log("🚀 ~ AuthController ~ validate ~ payload:", payload)
+        const rs = await this.service.validate(payload);
+        console.log("🚀 ~ AuthController ~ validate ~ rs:", rs)
+        return rs;
     }
 }

@@ -36,7 +36,7 @@ export interface LoginRequest {
 export interface LoginResponse {
   status: number;
   error: string[];
-  data?: TokenJson | undefined;
+  data: TokenJson | undefined;
 }
 
 export interface ValidateRequest {
@@ -46,7 +46,7 @@ export interface ValidateRequest {
 export interface ValidateResponse {
   status: number;
   error: string[];
-  id: number;
+  data: number;
 }
 
 export const AUTH_PACKAGE_NAME = "auth";
