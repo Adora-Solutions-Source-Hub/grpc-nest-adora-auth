@@ -51,14 +51,6 @@ export class User extends Model {
   @Column
   device_id: string;
 
-  @Default(new Date())
-  @Column
-  created_at: Date;
-
-  @Default(new Date())
-  @Column
-  updated_at: Date;
-
   @AllowNull
   @Column
   deleted_at: Date;
