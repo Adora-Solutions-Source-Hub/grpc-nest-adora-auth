@@ -1,5 +1,6 @@
 /** @format */
 
+import { DataTypes } from 'sequelize';
 import {
   Table,
   Column,
@@ -17,6 +18,13 @@ export class User extends Model {
   @AutoIncrement
   @Column
   id: number;
+
+  @Column({
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  })
+  public uid!: string;
 
   @Column
   name: string;
