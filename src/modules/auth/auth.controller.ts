@@ -3,11 +3,14 @@ import { AuthService } from './auth.service';
 import { AUTH_SERVICE_NAME, ValidateRequest } from './auth.pb';
 import { GrpcMethod } from '@nestjs/microservices';
 import { LoginRequestDto, RegisterRequestDto } from './dto/auth.dto';
+import { ConsumerService } from '../consumer/consumer.service';
 
 @Controller('auth')
 export class AuthController {
     @Inject(AuthService)
     private readonly service: AuthService;
+    @Inject(ConsumerService)
+    private consumerService: ConsumerService;
 
     @GrpcMethod(AUTH_SERVICE_NAME, 'Register')
     private async register(payload: RegisterRequestDto) {
@@ -21,7 +24,17 @@ export class AuthController {
     @GrpcMethod(AUTH_SERVICE_NAME, 'Login')
     private async login(payload: LoginRequestDto) {
         const rs = await this.service.login(payload);
-
+        // const data = {
+        //     client: { user },
+        //     payload: {
+        //         roomId,
+        //         content: textBot,
+        //         subType: type,
+        //         idMessage,
+        //         question: content,
+        //     },
+        // };
+        this.consumerService.publish({ data: rs.data });
         return rs;
     }
 

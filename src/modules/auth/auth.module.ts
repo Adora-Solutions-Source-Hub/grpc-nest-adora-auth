@@ -3,6 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UsersModule } from '../users/users.module';
+import { ConsumerModule } from '../consumer/consumer.module';
 
 @Module({
     imports: [
@@ -11,7 +12,8 @@ import { UsersModule } from '../users/users.module';
             secret: process.env.JWT_SECRET || "",
             signOptions: { expiresIn: "1d" },
         }),
-        UsersModule
+        UsersModule,
+        ConsumerModule
     ],
     controllers: [AuthController],
     providers: [AuthService]

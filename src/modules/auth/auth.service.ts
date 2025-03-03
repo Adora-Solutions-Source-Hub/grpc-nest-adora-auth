@@ -1,7 +1,7 @@
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
-import { LoginResponse, RegisterResponse, TokenJson, ValidateResponse } from './auth.pb';
+import { TokenJson } from './auth.pb';
 import { LoginRequestDto, RegisterRequestDto, ValidateRequestDto } from './dto/auth.dto';
 import { User } from '../users/user.entity';
 import * as bcrypt from 'bcrypt';

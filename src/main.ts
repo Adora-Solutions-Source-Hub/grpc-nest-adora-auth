@@ -4,6 +4,10 @@ import { INestMicroservice, ValidationPipe } from '@nestjs/common';
 import { Transport } from '@nestjs/microservices';
 import { protobufPackage } from './modules/auth/auth.pb';
 import { join } from 'path';
+import * as dotenv from 'dotenv'
+dotenv.config({
+  path: `${process.cwd()}/.env`,
+});
 
 async function bootstrap() {
   const app: INestMicroservice = await NestFactory.createMicroservice(AppModule, {

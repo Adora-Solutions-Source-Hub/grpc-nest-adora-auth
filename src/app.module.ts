@@ -5,7 +5,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './modules/users/users.module';
-import { RabbitmqModule } from './modules/rabbitmq/rabbitmq.module';
+import { SendMailModule } from './modules/send-mail/send-mail.module';
+import { ConsumerModule } from './modules/consumer/consumer.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { RabbitmqModule } from './modules/rabbitmq/rabbitmq.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    RabbitmqModule
+    SendMailModule,
+    ConsumerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

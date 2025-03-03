@@ -17,6 +17,7 @@ export const QUEUES = {
 
 
 export enum RMQNotificationChannels {
+  SENDMAIL_OTP = 'SENDMAIL_OTP',
   SYNC_DEVICE = 'SYNC_DEVICE',
   SYNC_USER = 'SYNC_USER',
   SYNC_CHAT = 'SYNC_CHAT',

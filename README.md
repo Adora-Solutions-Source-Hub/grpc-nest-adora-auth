@@ -45,17 +45,15 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Run tests
+## Install Rabbit Docker
 
 ```bash
 # unit tests
-$ npm run test
+$ docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4.0-management
+$ rabbitmq-plugins enable rabbitmq_management
+$ rabbitmqctl add_user adora_queue adora_queue
+$ rabbitmqctl set_permissions -p / adora_queue ".*"  ".*" ".*"
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
 ## Deployment
