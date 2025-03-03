@@ -13,9 +13,9 @@ export class ConsumerService {
         this.consumerClient = this.grpcClient.getService<AuthServiceClient>(AUTH_SERVICE_NAME);
     }
 
-    async publish({ data }) {
+    async mail({ data }) {
         console.log("🚀 ~ ConsumerService ~ publish ~ data:", data)
-        const stream = await this.consumerClient.sendmail({ data }).subscribe();
+        const stream = this.consumerClient.sendmail({ data }).subscribe();
 
         console.log("🚀 ~ ConsumerService ~ publish ~ stream:", stream)
         // stream

@@ -3006,7 +3006,7 @@ graphemer@^1.4.0:
 
 "grpc-nest-proto@https://github.com/Adora-Solutions-Source-Hub/gRPC-Nest-Proto.git":
   version "1.0.0"
-  resolved "https://github.com/Adora-Solutions-Source-Hub/gRPC-Nest-Proto.git#a39fcc0432722e3baae731f0b4e209236fecec28"
+  resolved "https://github.com/Adora-Solutions-Source-Hub/gRPC-Nest-Proto.git#d63ec97929d768f1203339118ba071ba4ce0b930"
 
 has-flag@^4.0.0:
   version "4.0.0"

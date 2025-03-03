@@ -24,17 +24,8 @@ export class AuthController {
     @GrpcMethod(AUTH_SERVICE_NAME, 'Login')
     private async login(payload: LoginRequestDto) {
         const rs = await this.service.login(payload);
-        // const data = {
-        //     client: { user },
-        //     payload: {
-        //         roomId,
-        //         content: textBot,
-        //         subType: type,
-        //         idMessage,
-        //         question: content,
-        //     },
-        // };
-        this.consumerService.publish({ data: rs.data });
+
+        this.consumerService.mail({ data: rs.data });
         return rs;
     }
 

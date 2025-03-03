@@ -10,6 +10,15 @@ import { Observable } from "rxjs";
 
 export const protobufPackage = "auth";
 
+export interface PushNotiRequest {
+  data: TokenJson | undefined;
+}
+
+export interface PushNotiResponse {
+  status: number;
+  error: string[];
+}
+
 export interface SendmailRequest {
   data: TokenJson | undefined;
 }
@@ -80,6 +89,8 @@ export interface AuthServiceClient {
   validate(request: ValidateRequest): Observable<ValidateResponse>;
 
   sendmail(request: SendmailRequest): Observable<SendmailResponse>;
+
+  pushNoti(request: PushNotiRequest): Observable<PushNotiResponse>;
 }
 
 export interface AuthServiceController {
@@ -90,11 +101,13 @@ export interface AuthServiceController {
   validate(request: ValidateRequest): Promise<ValidateResponse> | Observable<ValidateResponse> | ValidateResponse;
 
   sendmail(request: SendmailRequest): Promise<SendmailResponse> | Observable<SendmailResponse> | SendmailResponse;
+
+  pushNoti(request: PushNotiRequest): Promise<PushNotiResponse> | Observable<PushNotiResponse> | PushNotiResponse;
 }
 
 export function AuthServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["register", "login", "validate", "sendmail"];
+    const grpcMethods: string[] = ["register", "login", "validate", "sendmail", "pushNoti"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("AuthService", method)(constructor.prototype[method], method, descriptor);

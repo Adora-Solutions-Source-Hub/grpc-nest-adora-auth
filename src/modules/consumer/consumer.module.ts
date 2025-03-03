@@ -3,6 +3,9 @@ import { ConsumerService } from './consumer.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AUTH_PACKAGE_NAME, AUTH_SERVICE_NAME } from '../auth/auth.pb';
 import { join } from 'path';
+import { ConsumerController } from './consumer.controller';
+import { SendMailModule } from '../send-mail/send-mail.module';
+import { NotificationsModule } from '../notifications/notifications.module';
 
 @Module({
   imports: [
@@ -17,8 +20,11 @@ import { join } from 'path';
         },
       },
     ]),
+    SendMailModule,
+    NotificationsModule
   ],
   providers: [ConsumerService],
-  exports: [ConsumerService]
+  exports: [ConsumerService],
+  controllers: [ConsumerController]
 })
 export class ConsumerModule { }

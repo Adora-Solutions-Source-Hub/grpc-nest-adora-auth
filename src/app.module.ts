@@ -7,6 +7,7 @@ import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './modules/users/users.module';
 import { SendMailModule } from './modules/send-mail/send-mail.module';
 import { ConsumerModule } from './modules/consumer/consumer.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ConsumerModule } from './modules/consumer/consumer.module';
     }),
     SendMailModule,
     ConsumerModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
