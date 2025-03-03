@@ -29,18 +29,22 @@ export class AuthService {
         auth.phone = reg.phone;
         auth.email = reg.email;
         auth.password = await this.genPassword(reg.password);
-        auth.save()
-        return auth;
+        await auth.save();
+
+        return { data: auth.dataValues };
     }
 
     public async login({ email, password }: LoginRequestDto) {
+        console.log("🚀 ~ AuthService ~ login ~ email:", email)
         const user = await this.usersService.getOne({ email });
 
+        console.log("🚀 ~ AuthService ~ login ~ user:", user)
         if (!user) {
             return { status: HttpStatus.NOT_FOUND, error: ['E-Mail not found'] };
         }
 
         const isPasswordValid: boolean = this.comparePassword(password, user.password);
+        console.log("🚀 ~ AuthService ~ login ~ isPasswordValid:", isPasswordValid)
 
         if (!isPasswordValid) {
             return { status: HttpStatus.NOT_FOUND, error: ['Password wrong'] };
@@ -48,7 +52,7 @@ export class AuthService {
 
         const data: TokenJson = await this.signToken(user);
 
-        return data;
+        return { data };
     }
 
     public async validate({ token }: ValidateRequestDto) {
@@ -65,7 +69,7 @@ export class AuthService {
             return { status: HttpStatus.CONFLICT, error: ['User not found'], data: null };
         }
 
-        return decoded.id;
+        return { data: decoded.id };
     }
 
     private async genPassword(str: string) {

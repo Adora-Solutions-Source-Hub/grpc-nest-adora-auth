@@ -31,7 +31,7 @@ export class TransformInterceptor<T>
           return {
             data,
             message,
-            status: 400,
+            status: data?.status,
           };
         }
         if (data?.message && data?.message != "") {
